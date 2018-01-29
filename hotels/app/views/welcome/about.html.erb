@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Hotels</title>
+<%= stylesheet_link_tag('welcome') %>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span> 
+<%= image_tag('photo.png', :alt => 'Hotels', :size => '30x30', :class => 'd-inline-block align-top') %>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="index">
+<%= image_tag('photo.png', :alt => 'Hotels', :size => '30x30', :class => 'd-inline-block align-top') %>
+FIT Hotels</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="index">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="contactus">Contact Us</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= icon('sign-in') %> Book Hotel
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#signinModal" data-toggle="modal">Sign In</a>
+          <a class="dropdown-item" href="#signupModal" data-toggle="modal">Sign Up</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container-fluid text-center text-primary">
+    <h3 class="display-3">FIT Hotels Application</h3>
+    <p class="lead text-secondary">This is a Main Project Running on Ruby, and Amazon cloud services</p>
+  </div>
+</div>
+<div class="container">
+<br/>
+  <div class="row">
+    <div class="col">
+      <div class="d-flex p-2 justify-content-center">
+        <div class="card mb-3 ">
+          <%= image_tag('aboutus.png', :alt => 'About US', :height =>'500', :class => 'card-img-top') %> 
+            <div class="card-body">
+              <h4 class="card-title">Welcome To Hotels</h4>
+              <p class="card-text">
+                <p>Hotels is a leading provider of hotel accommodation worldwide, offering booking services through its own network of localised websites and telephone call centres.<p><br/>
+
+                <p>Hotels gives travellers one of the widest selections of accommodation on the net, including both independent and major chain hotels as well as self-catering in over hundreds of thousands properties worldwide. The company offers a one-stop shopping source for hotel pricing, amenities and availability and also specialises in providing travellers with accommodation during sold-out periods.</p><br/>
+              </p>
+              <p class="card-text"><small class="text-muted">We Value your Wish</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!--  Sign In Modal  -->
+<div class="modal fade bd-example-modal-sm" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="SignInModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+<form>
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title">Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">        
+  <div class="form-group">
+    <label for="signinEmail">Email address</label>
+    <input type="email" class="form-control" id="signinEmail" aria-describedby="emailHelp" placeholder="Enter email">    
+  </div>
+  <div class="form-group">
+    <label for="signinPassword">Password</label>
+    <input type="password" class="form-control" id="signinPassword" placeholder="Password">
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Sign In</button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+<!-- End of Sign In Modal -->
+
+<!--  Sign Up Modal  -->
+<div class="modal fade bd-example-modal-lg" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+
+<%= form_tag('/regpost', method:'post' ) do %>
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title">Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">        
+	<div class="form-group row">
+	    <label for="signup_fname" class="col-sm-2 col-form-label">First Name</label>
+	    <div class="col-sm-10">
+              <%= text_field_tag 'signup_fname',nil, class:'form-control', placeholder:'First Name' , required:true %>
+	    </div>
+	    </div>
+	<div class="form-group row">
+	    <label for="signup_lname" class="col-sm-2 col-form-label">Last Name</label>
+	    <div class="col-sm-10">
+		<%= text_field_tag 'signup_lname',nil, class:'form-control', placeholder:'Last Name' , required:true %>
+	    </div>
+	</div>
+	<div class="form-group row">
+	    <label for="signup_email" class="col-sm-2 col-form-label">Email</label>
+	    <div class="col-sm-10">
+		<%= email_field_tag 'signup_email',nil, class:'form-control', placeholder:'Email Id' , required:true %>
+	    </div>
+	</div>
+  <div class="form-group row">
+    <label for="signup_password" class="col-sm-2 col-form-label">Password</label>
+<div class="col-sm-10">
+<%= password_field_tag 'signup_password',nil, class:'form-control', placeholder:'Password' , required:true %>   
+</div>
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </div>
+    </div>
+<% end %>
+  </div>
+</div>
+<!-- End of Sign Up Modal -->
+<script>
+window.onload = function () { 
+
+<% if @showRegModal %>
+$('#signupModal').modal('show');  
+<% end %>
+
+<% if @showLoginModal %>
+$('#signinModal').modal('show');  
+<% end %>
+
+};
+</script>
+</body>
+</html>

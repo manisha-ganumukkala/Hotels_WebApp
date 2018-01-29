@@ -1,0 +1,164 @@
+var AWS = require("aws-sdk");
+AWS.config.update({
+  region: "us-east-2",
+  endpoint: "dynamodb.us-east-2.amazonaws.com"
+});
+
+var dynamodb = new AWS.DynamoDB.DocumentClient();
+var tableName = 'hotels';
+
+exports.handler = (event, context, callback) => {
+    
+    var maxid=0;
+    
+    var params = {
+        TableName: tableName,
+        ProjectionExpression: "id"
+    };
+
+    dynamodb.scan(params, function(err, data) {
+    if (err) {
+        console.log("Not Done: " + err);
+        callback(null,{status:"fail",info:"Db connection Error"});
+    }else{
+    data.Items.forEach(function(h) {
+        if(h.id>maxid){
+            maxid=h.id;
+            console.log('now max is:'+maxid);
+        }
+        });
+        console.log(JSON.stringify(data)+'-'+maxid);
+        var newid=maxid+1;
+    var image =""+newid+".jpg";
+    
+    var hotel={ 
+        "contact_number": {
+            "landline": event.landline,
+            "mobile": event.mobile  
+        },
+        "email": event.email,
+        "hotel_location": {
+            "address": event.adrs,
+            "city": event.city,
+            "state": event.state,
+            "street_number": 0,
+            "zipcode": parseInt(event.zipcode)    
+        },
+        "id": (maxid+1),
+        "image": image,
+        "name": event.name,
+        "number_of_persons_staying": 0,
+        "payment_type": {
+            "credit_card": {
+                "credit_card_number": 0,
+                "cvv": 0,
+                "expiery_date": {
+                    "month": "efwf",
+                    "year": 0
+                },
+                "name_on_the_card": "efwe"
+            },
+            "debit_card": {
+                "cvv": 0,
+                "debit_card_number": 0,
+                "expiery_date": {
+                    "month": "wef",
+                    "year": 0
+                },
+                "name_on_the_card": "ewfwe"
+            },
+            "gift_card": {
+                "cvv": 0,
+                "expiery_date": {
+                    "month": "efwef",
+                    "year": 0
+                },
+            "gift_card_number": 0,
+            "name_on_the_card": "wefwf"
+            }
+        },
+        "rooms_available": {
+            "ac_room": [
+                {
+                    "check_in": "0",
+                    "check_out": "0",
+                    "cost": 155,
+                    "reservation_made_by": "0"
+                },
+                {
+                    "check_in": "0",
+                    "check_out": "0",
+                    "cost": 155,
+                    "reservation_made_by": "0"
+                },
+                {
+                    "check_in": "0",
+                    "check_out": "0",
+                    "cost": 155,
+                    "reservation_made_by": "0"
+                }
+            ],
+            "non_ac_room": [
+                {
+                    "check_in": "0",
+                    "check_out": "0",
+                    "cost": 75,
+                    "reservation_made_by": "0"
+                },
+                {
+                    "check_in": "0",
+                    "check_out": "0",
+                    "cost": 75,
+                    "reservation_made_by": "0"
+                },
+                {
+                    "check_in": "0",
+                    "check_out": "0",
+                    "cost": 75,
+                    "reservation_made_by": "0"
+                }
+            ],
+            "suit": [
+                {
+                    "check_in": "0",
+                    "check_out": "0",
+                    "cost": 250,
+                    "reservation_made_by": "0"
+                },
+                {
+                    "check_in": "0",
+                    "check_out": "0",
+                    "cost": 250,
+                    "reservation_made_by": "0"
+                },
+                {
+                    "check_in": "0",
+                    "check_out": "0",
+                    "cost": 250,
+                    "reservation_made_by": "0"
+                }
+            ]
+        },
+        "smaoking_room": true
+    };
+    
+    var updateParams={
+        TableName:tableName,
+        Item:hotel
+    }
+    
+    dynamodb.put(updateParams, function(err, data) {
+        if (err) {
+            console.log(err, err.stack); // an error occurred
+            callback(null, {status:"fail",info:"Db connection Error"});
+        } else  {
+            console.log("success.with "+ JSON.stringify(hotel));
+            callback(null, {status:"success"});
+        }
+    });
+    }
+    });
+    
+    
+    
+};

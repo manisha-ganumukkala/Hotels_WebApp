@@ -1,0 +1,35 @@
+'use strict';
+
+var AWS = require("aws-sdk");
+AWS.config.update({
+  region: "us-east-2",
+  endpoint: "dynamodb.us-east-2.amazonaws.com"
+});
+
+var dynamodb = new AWS.DynamoDB.DocumentClient();
+var tableName = 'user';
+
+exports.handler = (event, context, callback) => {
+
+var params = {
+    TableName:tableName,
+    Item:{
+        "first_name": event.fname,
+        "last_name": event.lname,
+        "category": "user",
+        "id": event.id,
+        "password": event.pswd
+    },
+    ConditionExpression : "attribute_not_exists(id)"
+};
+
+    dynamodb.put(params, function(err, data) {
+    if (err) {
+        console.log("Not Done");
+        callback(null,{status:"fail",info:"Email Id Already Exists"});
+    } else {
+        console.log("Done");
+        callback(null,{status:"success",info:"User Registered"});
+    }
+});
+};

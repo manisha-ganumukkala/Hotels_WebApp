@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Hotels</title>
+<%= stylesheet_link_tag('welcome') %>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span> 
+<%= image_tag('photo.png', :alt => 'Hotels', :size => '30x30', :class => 'd-inline-block align-top') %>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="main">
+<%= image_tag('photo.png', :alt => 'Hotels', :size => '30x30', :class => 'd-inline-block align-top') %>
+FIT Hotels</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="main">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="signout"> <%= icon('sign-out') %> Sign Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container-fluid text-center text-primary">
+    <h3 class="display-3">FIT Hotels Application</h3>
+    <p class="lead text-secondary">Admin Page</p>
+  </div>
+</div>
+
+<div class="container">
+<br/>
+  <div class="row justify-content-center">
+    <div class="col">
+      <div class="btn-group btn-group-lg" role="group" aria-label="...">
+        <a href="viewAllHotels" class="btn btn-secondary" role="button">View All Hotels</a>        
+        <!-- <a href="main" class="btn btn-light" role="button">Primary link</a>
+        <a href="main" class="btn btn-secondary" role="button">Seconday link</a>        -->
+      </div>
+    </div>
+  </div>
+<br/>
+<br/>
+  <div class="row justify-content-center">
+    <div class="col">
+	<table class="table table-hover table-striped table-bordered table-responsive">
+	  <thead class="thead-primary">
+	    <tr>
+	      <th scope="col">Hotel Name</th>
+	      <th scope="col">City</th>
+	      <th scope="col">Land Line</th>
+	      <th scope="col">Mobile</th>
+	      <th scope="col">Email</th>
+	      <th scope="col">Customers</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+ 		<% @hotelDetails.each do |h|%>
+		<tr>
+			<th scope="row"><%= h['name'] %></th>
+			<td><%= h['hotel_location']['city'] %></td>
+			<td><%= h['contact_number']['landline'] %></td>
+			<td><%= h['contact_number']['mobile'] %></td>
+			<td><%= h['email'] %></td>
+			<td><%= h['number_of_persons_staying'] %></td>
+		</tr>
+		<% end %>
+	  </tbody>
+	</table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

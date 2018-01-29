@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Hotels</title>
+<%= stylesheet_link_tag('welcome') %>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span> 
+<%= image_tag('photo.png', :alt => 'Hotels', :size => '30x30', :class => 'd-inline-block align-top') %>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="main">
+<%= image_tag('photo.png', :alt => 'Hotels', :size => '30x30', :class => 'd-inline-block align-top') %>
+FIT Hotels</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="main">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="signout"> <%= icon('sign-out') %> Sign Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container-fluid text-center text-primary">
+    <h3 class="display-3">FIT Hotels Application</h3>
+    <p class="lead text-secondary">This is a Main Project Running on Ruby, and Amazon Web services</p>
+  </div>
+</div>
+
+<div class="container bg-gradient-dark">
+<br/>
+  <div class="row">
+    <div class="col">
+
+      <%= form_tag('/searchpost', method:'post', class:'form-inline justify-content-center' ) do %>
+
+	  <%= select_tag 'city', options_for_select(@cities), prompt: "Select City...", class:'custom-select mb-2 mr-sm-2 mb-sm-0' %>
+
+	<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+	  <div class="input-group-addon">From</div>
+	    <%= text_field_tag 'start_date', @start_date, placeholder: 'mm/dd/yyyy', maxlength: 15, size: 20, class: "form-control", required: true, readonly:true %>            
+	</div>
+
+	<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+	  <div class="input-group-addon">To</div>
+	    <%= text_field_tag 'end_date', @end_date, placeholder: 'mm/dd/yyyy', maxlength: 15, size: 20, class: "form-control", required: true, readonly:true %>            
+	</div>
+
+	<button type="submit" class="btn btn-primary">Search Hotels</button>
+<div class="text-danger mb-2 mr-sm-2 mb-sm-0"><%= @mainSearchError %></div>
+      <% end %>
+
+    </div>
+  </div>
+<br/>
+<%= @mainHotelsErrorMsg %>
+<br/>
+<br/>
+  <div class="row align-items-center justify-content-between">    
+ <% @hotelDetails.each do |h|%>
+<div class="col">
+<div class="card-deck">
+	<div class="card border-primary mb-3" style="width: 20rem;">
+	<%= image_tag('https://s3.us-east-2.amazonaws.com/rubyhotels/' + h['image'], :alt => 'Hotels', :class => 'card-img-top', :height => 300) %> 
+	  <div class="card-body">
+	    <h4 class="card-title"><%= h['name'] %></h4>
+            <h6 class="card-subtitle mb-2 text-muted">Location:</h6>
+	    <p class="card-text">
+<%= h['hotel_location']['address'] %> <br/>
+<%= h['hotel_location']['city'] %> ,
+<%= h['hotel_location']['state'] %> <br/>
+<%= h['hotel_location']['zipcode'] %> 
+</p>	    
+	  </div>
+	  <div class="card-body">
+<h6 class="card-subtitle mb-2 text-muted">Price/Day:</h6>
+	    <p class="card-text">
+Suits: <%= icon('usd') %><%= h['rooms_available']['suit'][0]['cost'] %><br/>
+AC Rooms: <%= icon('usd') %><%= h['rooms_available']['ac_room'][0]['cost'] %><br/>
+Non AC Rooms: <%= icon('usd') %><%= h['rooms_available']['non_ac_room'][0]['cost'] %>
+
+</p>	    
+	  </div>
+	  <ul class="list-group list-group-flush">
+	    <li class="list-group-item"><%= icon('envelope-o') %>&nbsp; <%= h['email']  %></li>
+	    <li class="list-group-item"><%= icon('phone') %>&nbsp; <%= h['contact_number']['landline']  %></li>
+	    <li class="list-group-item"><%= icon('mobile') %>&nbsp; <%= h['contact_number']['mobile']  %></li>	    
+	  </ul>
+	  <div class="card-footer text-center">
+<h6 class="card-subtitle mb-2 text-muted">Book:</h6>		
+		<%= link_to "Suit Room",  "booknow?rid=1&hid=#{h['id']}" , class: 'btn btn-success' %>
+                <%= link_to "AC Room",  "booknow?rid=2&hid=#{h['id']}" , class: 'btn btn-info' %>
+		<%= link_to "Non AC Room",  "booknow?rid=3&hid=#{h['id']}" , class: 'btn btn-primary' %>
+	  </div>
+	</div>
+    </div>
+</div>
+   <% end %>
+  </div>
+</div>
+
+</body>
+</html>

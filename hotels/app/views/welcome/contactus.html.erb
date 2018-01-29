@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Hotels</title>
+<%= stylesheet_link_tag('welcome') %>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span> 
+<%= image_tag('photo.png', :alt => 'Hotels', :size => '30x30', :class => 'd-inline-block align-top') %>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="index">
+<%= image_tag('photo.png', :alt => 'Hotels', :size => '30x30', :class => 'd-inline-block align-top') %>
+FIT Hotels</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="index">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="about">About</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="contactus">Contact Us</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= icon('sign-in') %> Book Hotel
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#signinModal" data-toggle="modal"><%= icon('sign-in') %> Sign In</a>
+          <a class="dropdown-item" href="#signupModal" data-toggle="modal"><%= icon('plus') %> Sign Up</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container-fluid text-center text-primary">
+    <h3 class="display-3">FIT Hotels Application</h3>
+    <p class="lead text-secondary">This is a Main Project Running on Ruby, and Amazon cloud services</p>
+  </div>
+</div>
+<div class="container">
+<br/>
+  <div class="row">
+    <div class="col">
+      <div class="card mb-3">
+<%= image_tag('contactus.png', :alt => 'Contact US', :height =>'500', :class => 'card-img-top') %> 
+        <div class="card-body">
+          <h4 class="card-title">Contact Us</h4>
+          <p class="card-text">
+      
+
+<div id="accordion" role="tablist">
+  <div class="card">
+    <div class="card-header" role="tab" id="headingOne">
+      <h5 class="mb-0">
+        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          How we determine our sort order
+        </a>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        As a traveller shopping on our site, you have many options to help you find the perfect hotel.
+
+The Sort settings allow you to order search results according your preferences, so you can view results in order of price, verified review score and other criteria.
+
+In addition, the Filter settings allow you to include or exclude various options to suit your travel needs.
+
+If you do not select a specific Sort option, by default we will show you a range of relevant options in the search results, based on the criteria outlined below.
+
+Our default sort order reflects the relevance of properties to your search criteria, as we want to make sure that you are able to find the offer that is right for you quickly and easily.
+
+We measure relevance by taking into account factors such as: a property's location, its review scores, the popularity of the property (measured by how many travellers on our sites make bookings at that property), the quality of the content provided by the property and the competitiveness of the property's rates and availability – all of which are relative to other properties meeting your chosen search criteria.
+
+The compensation which a property pays us for bookings made through our sites is also a factor for the relative ranking of properties with similar offers, based on the relevance factors described above.
+
+On our non-default sorts (for example, if you sort by price or by star rating), we will order properties with similar results based on the factors above.
+
+Additionally, we continually optimise our service to provide you with the best experience. Accordingly, we may test different default sort order algorithms from time to time. 
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTwo">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          What's your cancellation policy?
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+       We don't have a cancellation policy, but the hotel you booked does. You'll see their policy on the hotel's details page under "Hotel description" and "Book it". Once you've booked a room, the policy will also be included in your booking summary and in your confirmation email.
+
+The hotel's change and cancellation policy includes a cancellation deadline. If you cancel after this time, the hotel will charge you a fee. Some bookings are nonrefundable, regardless of when they're cancelled.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingThree">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Price Guarantee
+        </a>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        How it works
+
+If you find a cheaper, publicly available rate, including one listed on Hotels.com, we will offer you the difference in your original method of payment or a Hotels.com coupon. Your refund type will be determined by whether your original hotel booking is refundable or non-refundable.
+
+To qualify for the Price Guarantee, you must submit your claim prior to midnight local time the day before your stay and the following details must be identical for the cheaper rate:
+
+    Dates of travel
+    Hotel name and location
+    Room type
+    Occupancy
+    Cancellation policy
+
+To submit a claim for refundable bookings
+
+If the lower price is found on a competitor's website, Hotels.com will refund the price difference in the same method of your original payment.
+
+    Go to the Price Guarantee page.
+    Choose Ask us to match the price.
+    Fill in the information and select Go.
+
+If the lower price is found is on Hotels.com, you will need to rebook before you submit your claim.
+
+    Sign in to your Hotels.com account.
+    Make a new reservation online for the cheaper price.
+    Cancel your existing booking under Your Bookings.
+
+We will validate the lower price and process your refund. You will receive email confirmation within 24 hours. Refunds will be processed by Hotels.com immediately, but it can take up to 30 days for them to post.
+To submit a claim for non-refundable bookings
+
+We will validate the lower price and process your coupon. You will receive it via email within 24 hours.
+Good to know
+
+    We cannot match the price of bookings that hide the hotel name, government rates, AARP rates, rates available only to loyalty-program members, or bookings paid partly with loyalty points
+    You may include a screenshot of the cheaper listing with your Price Guarantee request, but it must contain the hotel's name, room type, price, and your travel dates.
+    All requests are subject to verification by Hotels.com. We will not accept screenshots or other purported evidence of a lower price that we cannot independently confirm. Nor will we verify any request that we believe, in our sole discretion, is the result of a printing or other error or is made fraudulently or in bad faith.
+
+If you still need help, please contact us.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+          </p>    
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--  Sign In Modal  -->
+<div class="modal fade bd-example-modal-sm" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="SignInModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <%= form_tag('/loginpost', method:'post' ) do %>
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title">Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">   
+	<div class="text-danger"><%= @loginErrorMsg %></div>            
+          <div class="form-group">
+            <label for="signinEmail">Email address</label>
+	    <%= email_field_tag 'signin_email',nil, class:'form-control', placeholder:'Email Id' , required:true %>
+          </div>
+          <div class="form-group">
+            <label for="signinPassword">Password</label>            
+	    <%= password_field_tag 'signin_password',nil, class:'form-control', placeholder:'Password' , required:true %>   
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary"><%= icon('sign-in') %> Sign In</button>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<!-- End of Sign In Modal -->
+
+<!--  Sign Up Modal  -->
+<div class="modal fade bd-example-modal-lg" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+
+<%= form_tag('/regpost', method:'post' ) do %>
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title">Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"> 
+	<div class="text-danger"><%= @regErrorMsg %></div>       
+	<div class="form-group row">
+	    <label for="signup_fname" class="col-sm-2 col-form-label">First Name</label>
+	    <div class="col-sm-10">
+              <%= text_field_tag 'signup_fname',nil, class:'form-control', placeholder:'First Name' , required:true %>
+	    </div>
+	    </div>
+	<div class="form-group row">
+	    <label for="signup_lname" class="col-sm-2 col-form-label">Last Name</label>
+	    <div class="col-sm-10">
+		<%= text_field_tag 'signup_lname',nil, class:'form-control', placeholder:'Last Name' , required:true %>
+	    </div>
+	</div>
+	<div class="form-group row">
+	    <label for="signup_email" class="col-sm-2 col-form-label">Email</label>
+	    <div class="col-sm-10">
+		<%= email_field_tag 'signup_email',nil, class:'form-control', placeholder:'Email Id' , required:true ,'aria-describedby':'emailHelpBlock' %>
+	    </div>
+	</div>
+  <div class="form-group row">
+    <label for="signup_password" class="col-sm-2 col-form-label">Password</label>
+<div class="col-sm-10">
+<%= password_field_tag 'signup_password',nil, class:'form-control', placeholder:'Password' , required:true %>   
+</div>
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary"><%= icon('plus') %> Sign Up</button>
+      </div>
+    </div>
+<% end %>
+  </div>
+</div>
+<!-- End of Sign Up Modal -->
+<script>
+window.onload = function () { 
+
+<% if @showRegModal %>
+$('#signupModal').modal('show');  
+<% end %>
+
+<% if @showLoginModal %>
+$('#signinModal').modal('show');  
+<% end %>
+
+};
+</script>
+</body>
+</html>

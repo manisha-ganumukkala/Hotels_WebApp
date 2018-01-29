@@ -1,0 +1,98 @@
+'use strict';
+
+var AWS = require("aws-sdk");
+AWS.config.update({
+  region: "us-east-2",
+  endpoint: "dynamodb.us-east-2.amazonaws.com"
+});
+
+var dynamodb = new AWS.DynamoDB.DocumentClient();
+var tableName = 'hotels';
+
+exports.handler = (event, context, callback) => {
+    
+    var room='ac_room';
+    
+    if(event.rid == 1){
+        room = 'suit';
+    }else if(event.rid==2){
+        room = 'ac_room';
+    }else{
+        room='non_ac_room';
+    }
+    
+    var pexp = "rooms_available."+room;
+    var params = {
+        TableName: tableName,
+        KeyConditionExpression:"id = :v1",
+        ProjectionExpression: pexp,
+        ExpressionAttributeValues: {
+            ":v1": parseInt(event.hid)
+        }
+    };
+    
+    dynamodb.query(params, function(err, data) {
+        if (err) {
+            console.log("Not Done: " + err);
+            callback(null,{status:"fail",info:"Db connection Error"+err});
+        }else{
+            var aroom=-1;
+            var counter=0;
+            var obj=[];
+            if(event.rid == 1){
+                obj = data.Items[0].rooms_available.suit;
+            }else if(event.rid==2){
+                obj = data.Items[0].rooms_available.ac_room;
+            }else{
+                obj = data.Items[0].rooms_available.non_ac_room;
+            }
+            
+            obj.forEach(function(s) {
+                if(s.reservation_made_by==='0'){
+                    aroom=counter;
+                }
+                counter++;
+            });
+            
+            if(aroom=== -1){
+                callback(null,{status:"fail",info:"Hotel Full in "+ room});
+            }else{
+                var date=new Date();
+                var d1 = (date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900);
+                var d2 = (date.getMonth()+1)+"/"+date.getDate()+"/"+(date.getYear()+1900);
+                
+                if(event.sdt!=='0'){
+                    d1=event.sdt;
+                    d2=event.edt
+                }
+                
+                var exp = "set rooms_available."+room+"["+aroom+"].reservation_made_by = :uid , "
+                            +"number_of_persons_staying = number_of_persons_staying + :one ,"
+                            +"rooms_available."+room+"["+aroom+"].check_in = :d1, "
+                            +"rooms_available."+room+"["+aroom+"].check_out = :d2 ";
+                params = {
+                    TableName: tableName,
+                    Key:{
+                        "id": parseInt(event.hid)
+                    },
+                    UpdateExpression: exp,
+                    ExpressionAttributeValues:{
+                        ":uid": event.id,
+                        ":one": 1,
+                        ":d1" : d1,
+                        ":d2" : d2
+                    },
+                    ReturnValues:"UPDATED_NEW"
+                };
+                
+                dynamodb.update(params, function(err, data) {
+                    if (err) {
+                        console.log("Not Done: " + err);
+                        callback(null,{status:"fail",info:"Db connection Error"+err});
+                    }
+                    callback(null,{status:"success",info:data});
+                });
+            }
+        }
+    });
+};
